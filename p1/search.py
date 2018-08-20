@@ -11,6 +11,7 @@
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # Student side autograding was added by Brad Miller, Nick Hay, and 
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
+# THIS  CODE  WAS MY OWN WORK , IT WAS  WRITTEN  WITHOUT  CONSULTING  ANY# SOURCES  OUTSIDE  OF THOSE  APPROVED  BY THE  INSTRUCTOR. Carol Tang carol.tang@emory.edu 2311944
 
 
 """
@@ -102,6 +103,7 @@ def depthFirstSearch(problem):
                     stack.push((successor[0], current[1] + [successor[1]]))
         else:
             return current[1]
+    return current[1]
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
@@ -120,8 +122,7 @@ def breadthFirstSearch(problem):
                     queue.push((successor[0], (current[1] + [successor[1]])))
         else:
             return current[1]
-
-
+    return current[1]
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
@@ -140,6 +141,7 @@ def uniformCostSearch(problem):
                     pq.push((successor[0], (current[1] + [successor[1]])), problem.getCostOfActions(current[1] + [successor[1]]))
         else:
             return current[1]
+    return current[1]
     util.raiseNotDefined()
 
 
@@ -168,7 +170,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                     pq.push((successor[0], (current[1] + [successor[1]])), succCost)
         else:
             return current[1]
-
+    return current[1]
     util.raiseNotDefined()
 
 

@@ -11,6 +11,8 @@
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # Student side autograding was added by Brad Miller, Nick Hay, and 
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
+#
+# THIS  CODE  WAS MY OWN WORK , IT WAS  WRITTEN  WITHOUT  CONSULTING  ANY# SOURCES  OUTSIDE  OF THOSE  APPROVED  BY THE  INSTRUCTOR. Carol Tang carol.tang@emory.edu 2311944
 
 
 """
@@ -286,14 +288,16 @@ class CornersProblem(search.SearchProblem):
         # in initializing the problem
         "*** YOUR CODE HERE ***"
 
+
     def getStartState(self):
         "Returns the start state (in your state space, not the full Pacman state space)"
-        "*** YOUR CODE HERE ***"
+        return self.startingPosition, (False, False, False, False)
         util.raiseNotDefined()
 
     def isGoalState(self, state):
         "Returns whether this search state is a goal state of the problem"
-        "*** YOUR CODE HERE ***"
+        allCorner = state[1]
+        return allCorner[0] and allCorner[1] and allCorner[2] and allCorner[3]
         util.raiseNotDefined()
 
     def getSuccessors(self, state):
@@ -312,15 +316,29 @@ class CornersProblem(search.SearchProblem):
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             # Add a successor state to the successor list if the action is legal
             # Here's a code snippet for figuring out whether a new position hits a wall:
-            #   x,y = currentPosition
-            #   dx, dy = Actions.directionToVector(action)
-            #   nextx, nexty = int(x + dx), int(y + dy)
-            #   hitsWall = self.walls[nextx][nexty]
+            x,y = state[0]
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            hitsWall = self.walls[nextx][nexty]
 
-            "*** YOUR CODE HERE ***"
+            if not hitsWall:
+                cost = 1
+                Ocorners = state[1]
+                next = (nextx, nexty)
+                if next == self.corners[0]:
+                    Ocorners = (True, Ocorners[1], Ocorners[2], Ocorners[3])
+                elif next == self.corners[1]:
+                    Ocorners = (Ocorners[0], True, Ocorners[2], Ocorners[3])
+                elif next == self.corners[2]:
+                    Ocorners = (Ocorners[0], Ocorners[1], True, Ocorners[3])
+                elif next == self.corners[3]:
+                    Ocorners = (Ocorners[0], Ocorners[1], Ocorners[2], True)
+                successor = (next, Ocorners)
+                successors.append((successor, action, cost))
 
         self._expanded += 1
         return successors
+
 
     def getCostOfActions(self, actions):
         """
@@ -353,7 +371,26 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    current = state[0]
+    currentCorners = list(state[1])
+    gameCorners = problem.corners
+    unvisited = util.PriorityQueue()
+    cost = 0
+    for cC in currentCorners:
+        if not cC:
+            dis = util.manhattanDistance(current, gameCorners[currentCorners.index(cC)])
+            unvisited.push((gameCorners[currentCorners.index(cC)], dis), dis)
+    if not unvisited.isEmpty():
+        cur, manDis = unvisited.pop()
+        cost = cost + manDis
+    top = problem.walls.height - 2
+    right = problem.walls.width - 2
+    if top >= right:
+        cost = cost + 2 * (right - 1) + top - 1
+    else:
+        cost = cost + 2 * (top - 1) + right - 1
+
+    return cost # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
