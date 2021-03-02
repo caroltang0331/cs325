@@ -33,7 +33,7 @@ def buyLotsOfFruit(orderList):
     Returns cost of order
     """
     a = 1
-    b = 1
+    c = 1
     totalCost = 0.0
     for fruit in orderList:
         if fruit[0] not in fruitPrices.keys():
