@@ -11,6 +11,7 @@
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # Student side autograding was added by Brad Miller, Nick Hay, and 
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
+# THIS CODE WAS MY OWN WORK , IT WAS WRITTEN WITHOUT CONSULTING ANY# SOURCES OUTSIDE OF THOSE APPROVED BY THE INSTRUCTOR. _Your_Name_Here Carol Tang 2311944_
 
 
 import util

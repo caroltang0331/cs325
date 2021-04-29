@@ -11,7 +11,7 @@
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # Student side autograding was added by Brad Miller, Nick Hay, and
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
-
+# THIS CODE WAS MY OWN WORK , IT WAS WRITTEN WITHOUT CONSULTING ANY# SOURCES OUTSIDE OF THOSE APPROVED BY THE INSTRUCTOR. _Your_Name_HereCarolTang 2311944_
 import itertools
 import util
 import random
@@ -349,9 +349,10 @@ class ParticleFilter(InferenceModule):
         """
         "*** YOUR CODE HERE ***"
         mylist = list()
-        for par in self.particles:
+        for par in self.particles: #given frevious position
+            #same as elapsetime in exactInference
             distr = self.getPositionDistribution(self.setGhostPosition(gameState, par))
-            mylist.append(util.sample(distr))
+            mylist.append(util.sample(distr)) #generate sample from belief distribution
         self.particles = mylist
 
     def getBeliefDistribution(self):
@@ -364,7 +365,7 @@ class ParticleFilter(InferenceModule):
 
         prob = util.Counter()
         for i in self.legalPositions:
-            prob[i] = self.particles.count(i)*1.0/self.numParticles
+            prob[i] = self.particles.count(i)*1.0/self.numParticles #*1.0 so type is correct
         # print allPossible
         # print allPossible.normalize()
         prob[self.getJailPosition()] = self.particles.count(self.getJailPosition()) / float(self.numParticles)
