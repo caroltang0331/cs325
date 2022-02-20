@@ -1,3 +1,6 @@
+#THIS CODE IS MY OWN WORK, IT WAS WRITTEN WITHOUT CONSULTING
+
+#A TUTOR OR CODE WRITTEN BY OTHER STUDENTS - Carol Tang
 # valueIterationAgents.py
 # -----------------------
 # Licensing Information:  You are free to use or extend these projects for 
